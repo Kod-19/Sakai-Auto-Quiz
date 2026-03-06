@@ -96,8 +96,7 @@ def init_driver():
         "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
-    # Uncomment below line once fully tested to run without browser window:
-    # options.add_argument("--headless")
+    
     service = Service(ChromeDriverManager().install())
     return webdriver.Chrome(service=service, options=options)
 
@@ -215,7 +214,7 @@ def scrape_and_answer_block(driver, block, client):
         if not inputs:
             return False
 
-        # Get labels using fuzzy approach
+        # 
         choices = []
         for inp in inputs:
             try:
