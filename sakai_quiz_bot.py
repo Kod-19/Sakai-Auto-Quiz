@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv
 
 # Load credentials from .env file
-load_dotenv()
+load_dotenv(override=True)
 LOGIN_URL    = "https://sakai.ug.edu.gh/portal/site/!gateway/tool/55840c0d-ea44-4827-84cb-5270d764ecf7"
 USERNAME     = os.getenv("USERNAME")
 PASSWORD     = os.getenv("PASSWORD")
