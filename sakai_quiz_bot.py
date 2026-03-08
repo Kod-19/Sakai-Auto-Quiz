@@ -1,5 +1,5 @@
 """
-Sakai Quiz Bot — MAIN BOT (Groq AI)
+Sakai Quiz Bot — MAIN BOT (OpenAI)
 Handles: single/multi question pages, radio + checkbox questions,
          stale elements, iframe ghosting, human-like delays, fuzzy matching
 """
@@ -7,7 +7,7 @@ Handles: single/multi question pages, radio + checkbox questions,
 import time
 import random
 import os
-from groq import Groq
+from openai import OpenAI
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -22,7 +22,7 @@ load_dotenv(override=True)
 LOGIN_URL    = "https://sakai.ug.edu.gh/portal/site/!gateway/tool/55840c0d-ea44-4827-84cb-5270d764ecf7"
 USERNAME     = os.getenv("USERNAME")
 PASSWORD     = os.getenv("PASSWORD")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 QUIZ_PAGES = [
     {"title": "MATH 233", "url": "https://sakai.ug.edu.gh/portal/site/MATH-223-1-S1-2526/tool/4d3cad86-206e-49a6-9ac5-af1c111da079/jsf/index/mainIndex"},
@@ -62,7 +62,7 @@ def get_ai_answer(client, question, choices, multi=False):
             f"Reply with ONLY the number of the correct choice (e.g. '2'). No explanation."
         )
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20
     )
@@ -237,13 +237,13 @@ def scrape_and_answer_block(driver, block, client):
 
         if is_multi:
             best_list = get_ai_answer(client, q_text, choices, multi=True)
-            print(f"    → Groq picked: {best_list}")
+            print(f"    → OpenAI picked: {best_list}")
             for i, inp in enumerate(inputs):
                 if i < len(choices) and any(fuzzy_match(b, choices[i]) for b in best_list):
                     driver.execute_script("arguments[0].click();", inp)
         else:
             best = get_ai_answer(client, q_text, choices, multi=False)
-            print(f"    → Groq picked: '{best}'")
+            print(f"    → OpenAI picked: '{best}'")
             for i, inp in enumerate(inputs):
                 if i < len(choices) and fuzzy_match(best, choices[i]):
                     driver.execute_script("arguments[0].click();", inp)
@@ -338,14 +338,14 @@ def answer_all_questions(driver, wait, client):
 
                 if is_multi:
                     best_list = get_ai_answer(client, q_text, choices, multi=True)
-                    print(f"  → Groq picked: {best_list}")
+                    print(f"  → OpenAI picked: {best_list}")
                     for i, inp in enumerate(inputs):
                         if i < len(choices) and any(fuzzy_match(b, choices[i]) for b in best_list):
                             driver.execute_script("arguments[0].click();", inp)
                     answered += 1
                 else:
                     best = get_ai_answer(client, q_text, choices, multi=False)
-                    print(f"  → Groq picked: '{best}'")
+                    print(f"  → OpenAI picked: '{best}'")
                     for i, inp in enumerate(inputs):
                         if i < len(choices) and fuzzy_match(best, choices[i]):
                             driver.execute_script("arguments[0].click();", inp)
@@ -516,17 +516,17 @@ def answer_quiz_page(driver, wait, client, quiz_url, quiz_title):
 
 def main():
     print("=" * 55)
-    print("   Sakai Quiz Bot (Groq AI) — Starting")
+    print("   Sakai Quiz Bot (OpenAI) — Starting")
     print("=" * 55)
 
-    if not USERNAME or not PASSWORD or not GROQ_API_KEY:
+    if not USERNAME or not PASSWORD or not OPENAI_API_KEY:
         print("[!] Missing credentials! Make sure your .env file exists with:")
         print("    USERNAME=your_id")
         print("    PASSWORD=your_password")
-        print("    GROQ_API_KEY=your_key")
+        print("    OPENAI_API_KEY=your_key")
         return
 
-    client = Groq(api_key=GROQ_API_KEY)
+    client = OpenAI(api_key=OPENAI_API_KEY)
     driver = init_driver()
     wait   = WebDriverWait(driver, 15)
 
