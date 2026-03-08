@@ -1,6 +1,6 @@
 # 🤖 Sakai Auto Quiz Bot
 
-An intelligent automation bot that logs into the **University of Ghana Sakai LMS**, detects available quizzes across your courses, and automatically answers them using **Groq AI (Llama 3.3 70B)** — for free.
+An intelligent automation bot that logs into the **University of Ghana Sakai LMS**, detects available quizzes across your courses, and automatically answers them using **OpenAI (GPT-3.5-turbo)**.
 
 Handles radio button questions, "select all that apply" checkboxes, paginated quizzes (one question per page), and multi-question pages. Built with Selenium and Python.
 
@@ -10,7 +10,7 @@ Handles radio button questions, "select all that apply" checkboxes, paginated qu
 
 - 🔐 Auto-login to Sakai with your credentials
 - 📚 Scans multiple course quiz pages automatically
-- 🧠 Uses Groq AI (free) to answer every question intelligently
+- 🧠 Uses OpenAI to answer every question intelligently
 - ✅ Handles both single-choice (radio) and multi-choice (checkbox) questions
 - 📄 Works with paginated quizzes (Next button) and all-on-one-page layouts
 - 🤝 Checks the Honor Pledge checkbox automatically before starting
@@ -25,7 +25,7 @@ Handles radio button questions, "select all that apply" checkboxes, paginated qu
 - A computer running **macOS, Windows, or Linux**
 - **Python 3.9 or higher**
 - **Google Chrome** browser installed
-- A free **Groq API key** (get one at [console.groq.com](https://console.groq.com))
+- An **OpenAI API key** (get one at [platform.openai.com](https://platform.openai.com))
 - Your **Sakai student ID and password**
 
 ---
@@ -86,27 +86,27 @@ You'll know it's active when you see `(venv)` at the start of your terminal line
 With the virtual environment active, run:
 
 ```bash
-pip install selenium groq webdriver-manager python-dotenv
+pip install selenium openai webdriver-manager python-dotenv
 ```
 
 This installs:
 | Package | Purpose |
 |---|---|
 | `selenium` | Controls the Chrome browser automatically |
-| `groq` | Connects to the Groq AI API to answer questions |
+| `openai` | Connects to the OpenAI API to answer questions |
 | `webdriver-manager` | Automatically downloads the correct ChromeDriver |
 | `python-dotenv` | Loads your credentials securely from the `.env` file |
 
 ---
 
-## 🔑 Step 5 — Get a Free Groq API Key
+## 🔑 Step 5 — Get an OpenAI API Key
 
-1. Go to [console.groq.com](https://console.groq.com)
-2. Sign up for a free account
+1. Go to [platform.openai.com](https://platform.openai.com)
+2. Sign up for an account (you'll need to add a payment method, but the costs are minimal)
 3. Click **"API Keys"** in the left sidebar
-4. Click **"Create API Key"**, give it a name, and copy the key
+4. Click **"Create new secret key"**, give it a name, and copy the key
 
-> Groq's free tier is generous — more than enough for hundreds of quizzes.
+> OpenAI offers a generous free tier for new users, and usage costs are very low for quiz answering.
 
 ---
 
@@ -123,15 +123,15 @@ USERNAME=your_student_id_here
 # Your Sakai password
 PASSWORD=your_password_here
 
-# Your Groq API key (get it free from console.groq.com)
-GROQ_API_KEY=your_groq_api_key_here
+# Your OpenAI API key (get it from platform.openai.com)
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 **Example:**
 ```env
 USERNAME=20012345
 PASSWORD=mypassword123
-GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+OPENAI_API_KEY=sk-...your_key_here
 ```
 
 > ⚠️ **Never share your `.env` file or commit it to GitHub.** It contains your personal login credentials.
@@ -209,7 +209,7 @@ Sakai-Auto-Quiz/
 
 | Problem | Fix |
 |---|---|
-| `ModuleNotFoundError: No module named 'groq'` | Run `pip install groq` with venv active |
+| `ModuleNotFoundError: No module named 'openai'` | Run `pip install openai` with venv active |
 | `source: no such file or directory: venv/bin/activate` | Run `python3 -m venv venv` first to create the venv |
 | Bot logs in but finds no quizzes | Check that the URLs in `QUIZ_PAGES` are correct for your courses |
 | Chrome opens but login fails | Your Sakai password may have changed — update your `.env` file |
@@ -227,6 +227,6 @@ This tool is intended for personal use and educational exploration of browser au
 
 Built with:
 - [Selenium](https://selenium.dev) — browser automation
-- [Groq](https://groq.com) — free, fast AI inference
-- [Llama 3.3 70B](https://groq.com/blog/llama-3-3-70b-is-now-available-on-groq/) — the AI model answering your questions
+- [OpenAI](https://openai.com) — AI API for intelligent question answering
+- [GPT-3.5-turbo](https://platform.openai.com/docs/models/gpt-3-5-turbo) — the AI model answering your questions
 - [webdriver-manager](https://github.com/SergeyPirogov/webdriver_manager) — automatic ChromeDriver management
