@@ -30,6 +30,7 @@ QUIZ_PAGES = [
     {"title": "DCIT 211", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-211-1-S1-2526/tool/de8c3576-7bc2-4ffc-b69a-b40087140fbd/jsf/index/mainIndex"},
     {"title": "DCIT 201", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-201-1-S1-2526/tool/fb5150aa-059f-4c47-87eb-08f99c508a85/jsf/index/mainIndex"},
     {"title": "DCIT 207", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-207-1-S1-2526/tool/e3b9d77f-eaa9-45ae-a40a-4214a54bfaef/jsf/index/mainIndex"},
+    {"title": "CBAS 210", "url": "https://sakai.ug.edu.gh/portal/site/CBAS-210-1-S1-2526/tool/8e281b60-4a1f-40e0-a008-e0e5ba994e4e/jsf/index/mainIndex"}
 ]
 
 
