@@ -149,6 +149,7 @@ QUIZ_PAGES = [
     {"title": "DCIT 211", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-211-.../jsf/index/mainIndex"},
     {"title": "DCIT 201", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-201-.../jsf/index/mainIndex"},
     {"title": "DCIT 207", "url": "https://sakai.ug.edu.gh/portal/site/DCIT-207-.../jsf/index/mainIndex"},
+    {"title": "CBAS 210", "url": "https://sakai.ug.edu.gh/portal/site/CBAS-210-.../jsf/index/mainIndex"}
 ]
 ```
 
